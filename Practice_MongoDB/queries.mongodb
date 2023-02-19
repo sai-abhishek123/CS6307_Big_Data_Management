@@ -1,0 +1,11 @@
+db.listingandReviews.countDocuments(); // counts all the documents that are present in a collection
+db.listingsAndReviews.findOne(); // find the first document in the collection
+db.listingsAndReviews.find({'property_type':'House'}) // finds the value 'House' for attribute name 'property_type'. when we need to find a specific attribute, we need to put attribute name in inverted commas : 'value'
+db.listingsAndReviews.find({'property_type':'House'}).count() // finds the count of all the documents whose property type is 'House'
+db.listingsAndReviews.find({'property_type':'House','bed_type':'Real Bed'}) // finds all the documents whose property_type is House and bed_type is Real Bed. we can add multiple attribues in the query by seperating all the attributes in find() by inserting ,
+db.listingsAndReviews.find({'property_type':'House','bed_type':'Real Bed'}).count() // finds the count of all the documents whose property_type is house and bed_type is Real Bed
+db.listingsAndReviews.find({'address.country':'United States'}) // find all the documents whose country field in address attribute has United States
+db.listingsAndReviews.find({'address.country':'United States'}).count() // counts all the documents whose country field in address attribute has United States
+db.listingsAndReviews.distinct("address.country") // finds all the district countries in the database.  usage - db.collectionname.distinct("attribute_name")
+db.listingsAndReviews.find({"address.market":'New York',"price":{$lt:500}}) // finds all the documents whose address_market is New York and the price is less that 500. We can use less than operator in this way - db.collectionname.find({"attribute_name":{$lt :value}}) 
+
