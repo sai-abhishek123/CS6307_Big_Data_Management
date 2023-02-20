@@ -7,5 +7,7 @@ db.listingsAndReviews.find({'property_type':'House','bed_type':'Real Bed'}).coun
 db.listingsAndReviews.find({'address.country':'United States'}) // find all the documents whose country field in address attribute has United States
 db.listingsAndReviews.find({'address.country':'United States'}).count() // counts all the documents whose country field in address attribute has United States
 db.listingsAndReviews.distinct("address.country") // finds all the district countries in the database.  usage - db.collectionname.distinct("attribute_name")
-db.listingsAndReviews.find({"address.market":'New York',"price":{$lt:500}}) // finds all the documents whose address_market is New York and the price is less that 500. We can use less than operator in this way - db.collectionname.find({"attribute_name":{$lt :value}}) 
+db.listingsAndReviews.find({"address.market":'New York',"price":{$lt:500}}) 
+
+// finds all the documents whose address_market is New York and the price is less that 500. We can use less than operator in this way - db.collectionname.find({"attribute_name":{$lt :value}}) 
 
