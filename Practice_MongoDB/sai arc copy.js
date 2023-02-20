@@ -35,14 +35,14 @@ Qualtrics.SurveyEngine.addOnload(function()
 				}
 				else if (mnth+1<mm) 
 				{
-					alert("Tests cannot be scheduled in the past 1");
+					alert("Tests cannot be scheduled in the past.");
 					$('NextButton').disabled = true;
 				}
 				else if(mnth+1==mm)
 				{
 					if(dy<dd)
 					{
-						alert("Tests cannot be scheduled in the past 2");
+						alert("Tests cannot be scheduled in the past.");
 						$('NextButton').disabled = true;
 					}
 				}
