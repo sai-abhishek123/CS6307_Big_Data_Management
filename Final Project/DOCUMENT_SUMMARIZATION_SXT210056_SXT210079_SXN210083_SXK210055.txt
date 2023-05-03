@@ -1,0 +1,63 @@
+pip install pyspark
+pip install nltk
+pip install -U spacy
+ pip install spark-nlp
+!python -m spacy download en_core_web_sm
+import sys
+import nltk
+import spacy
+import en_core_web_sm
+from string import punctuation
+#importing the stopword library to remove the english stopwords
+import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+stopp_words = set(stopwords.words('english'))
+import urllib.request
+#using the files hosted in the git repository we are reading the file
+in_u = "https://raw.githubusercontent.com/sai-abhishek123/CS6307/master/Spider%20man%20far%20from%20home%20plot.txt"
+rpsee = urllib.request.urlopen(in_u)
+in_file = rpsee.read().decode('utf-8')
+display(in_file) #displaying the text format of the input url
+nlptest = spacy.load('en_core_web_sm')
+doctext=nlptest(in_file)
+punctuation = punctuation + '\n'
+punctuation
+wfreq = {}
+for wrd in doctext:
+    if wrd.text.lower() not in stopp_words:
+        if wrd.text.lower() not in punctuation:
+            if wrd.text not in wfreq.keys():
+                wfreq[wrd.text] = 1
+            else:
+                wfreq[wrd.text] += 1               
+print(wfreq) #printing frequency of each word
+maximum_frequencies = max(wfreq.values())
+maximum_frequencies #printing the maximum frequency word
+for words in wfreq.keys():
+    wfreq[words] = wfreq[words]/maximum_frequencies 
+print(wfreq)
+line_token = [data for data in doctext.sents]
+print(line_token)
+line_scores = {}
+for data in line_token:
+    for words in data:
+        if words.text.lower() in wfreq.keys():
+            if data not in line_scores.keys():
+                line_scores[data] = wfreq[words.text.lower()]
+            else:
+                line_scores[data] += wfreq[words.text.lower()]    
+line_scores #printing score of each line
+from heapq import nlargest
+line_length = int(len(line_token)*0.3)
+line_length #printing line length
+summarizedData = nlargest(line_length, line_scores, key = line_scores.get)
+summarizedData
+summarized_output = [words.text for words in summarizedData]
+summarizedData = ' '.join(summarized_output) #joins all the summarized outputs sepearated by " "
+print("Input Document")
+print(in_file)
+print("Summarized text of Input Document")
+print(summarizedData)
+len(in_file)
+len(summarizedData)
